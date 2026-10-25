@@ -51,4 +51,9 @@ describe("QueryProcessor", () => {
         const response: string = QueryProcessor(query);
         expect(response).toBe("3, 67, 5");
     });
+    test('should compute powers', () => {
+        const query = "What is 59 to the power of 93?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe("488919189022930724979613792621858909436902741445876996549674255477956124699504163824202072362533451376978807604502739230886865021683355980533142394664467315445260779");
+    });
 });

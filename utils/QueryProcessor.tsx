@@ -12,6 +12,16 @@ export default function QueryProcessor(query: string): string {
     return numbers.reduce((sum, n) => sum + n, 0).toString();
   }
 
+  const powerMatch = query.match(/what is (\d+) to the power of (\d+)/i);
+  if (powerMatch) {
+    const base = BigInt(powerMatch[1]);
+    let result = BigInt(1);
+    for (let i = 0; i < parseInt(powerMatch[2]); i++) {
+      result *= base;
+    }
+    return result.toString();
+  }
+
   if (query.toLowerCase().includes("primes")) {
     const numbers = (query.match(/\d+/g) || []).map(Number);
     const isPrime = (n: number) => {
