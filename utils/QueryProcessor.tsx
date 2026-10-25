@@ -7,9 +7,28 @@ export default function QueryProcessor(query: string): string {
     );
   }
 
-  if (/what is -?\d+( plus -?\d+)+/i.test(query)) {
-    const numbers = (query.match(/-?\d+/g) || []).map(Number);
-    return numbers.reduce((sum, n) => sum + n, 0).toString();
+  const arithmeticMatch = query.match(
+    /what is (-?\d+(?: (?:plus|minus|multiplied by) -?\d+)+)\??$/i
+  );
+  if (arithmeticMatch) {
+    const tokens = arithmeticMatch[1].toLowerCase().split(" ").filter((t) => t !== "by");
+    // Multiplication first, then addition/subtraction left to right
+    const terms: number[] = [Number(tokens[0])];
+    const ops: string[] = [];
+    for (let i = 1; i < tokens.length; i += 2) {
+      const n = Number(tokens[i + 1]);
+      if (tokens[i] === "multiplied") {
+        terms[terms.length - 1] *= n;
+      } else {
+        ops.push(tokens[i]);
+        terms.push(n);
+      }
+    }
+    let result = terms[0];
+    for (let i = 0; i < ops.length; i++) {
+      result = ops[i] === "plus" ? result + terms[i + 1] : result - terms[i + 1];
+    }
+    return result.toString();
   }
 
   const powerMatch = query.match(/what is (\d+) to the power of (\d+)/i);

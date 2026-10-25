@@ -56,4 +56,15 @@ describe("QueryProcessor", () => {
         const response: string = QueryProcessor(query);
         expect(response).toBe("488919189022930724979613792621858909436902741445876996549674255477956124699504163824202072362533451376978807604502739230886865021683355980533142394664467315445260779");
     });
+    test('should respect multiplication precedence', () => {
+        const query = "What is 79 plus 4 multiplied by 81?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe("403");
+    });
+
+    test('should subtract', () => {
+        const query = "What is 50 minus 8 minus 2?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe("40");
+    });
 });
