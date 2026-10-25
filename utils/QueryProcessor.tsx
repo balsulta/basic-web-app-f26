@@ -12,6 +12,13 @@ export default function QueryProcessor(query: string): string {
     return (parseInt(addMatch[1]) + parseInt(addMatch[2])).toString();
   }
 
+  if (query.toLowerCase().includes("largest")) {
+    const numbers = (query.match(/-?\d+/g) || []).map(Number);
+    if (numbers.length > 0) {
+      return Math.max(...numbers).toString();
+    }
+  }
+
   if (query.toLowerCase().includes("name")) {
     return "bashayer";
   }

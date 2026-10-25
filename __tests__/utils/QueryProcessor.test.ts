@@ -36,4 +36,9 @@ describe("QueryProcessor", () => {
         const response: string = QueryProcessor(query);
         expect(response).toBe("124");
     });
+    test('should return the largest number', () => {
+        const query = "Which of the following numbers is the largest: 22, 68, 36?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe("68");
+    });
 });
