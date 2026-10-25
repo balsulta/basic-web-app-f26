@@ -7,6 +7,11 @@ export default function QueryProcessor(query: string): string {
     );
   }
 
+  const addMatch = query.match(/what is (-?\d+) plus (-?\d+)/i);
+  if (addMatch) {
+    return (parseInt(addMatch[1]) + parseInt(addMatch[2])).toString();
+  }
+
   if (query.toLowerCase().includes("name")) {
     return "bashayer";
   }

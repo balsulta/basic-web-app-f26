@@ -31,4 +31,9 @@ describe("QueryProcessor", () => {
            const response: string = QueryProcessor(query);
            expect(response).toBe("balsulta");
        });
+    test('should add two numbers', () => {
+        const query = "What is 43 plus 81?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe("124");
+    });
 });
