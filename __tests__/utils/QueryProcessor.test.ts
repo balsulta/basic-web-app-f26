@@ -67,4 +67,9 @@ describe("QueryProcessor", () => {
         const response: string = QueryProcessor(query);
         expect(response).toBe("40");
     });
+    test('should find anagrams', () => {
+        const query = "Which of the following is an anagram of listen: silent, enlists, google, banana?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe("silent");
+    });
 });

@@ -41,6 +41,17 @@ export default function QueryProcessor(query: string): string {
     return result.toString();
   }
 
+  const anagramMatch = query.match(/anagram of (\w+): (.+?)\??$/i);
+  if (anagramMatch) {
+    const sortLetters = (word: string) => word.toLowerCase().split("").sort().join("");
+    const target = sortLetters(anagramMatch[1]);
+    return anagramMatch[2]
+      .split(",")
+      .map((word) => word.trim())
+      .filter((word) => sortLetters(word) === target)
+      .join(", ");
+  }
+
   if (query.toLowerCase().includes("primes")) {
     const numbers = (query.match(/\d+/g) || []).map(Number);
     const isPrime = (n: number) => {
