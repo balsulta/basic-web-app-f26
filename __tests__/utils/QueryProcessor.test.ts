@@ -41,4 +41,9 @@ describe("QueryProcessor", () => {
         const response: string = QueryProcessor(query);
         expect(response).toBe("68");
     });
+    test('should add three numbers', () => {
+        const query = "What is 4 plus 41 plus 12?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe("57");
+    });
 });

@@ -7,9 +7,9 @@ export default function QueryProcessor(query: string): string {
     );
   }
 
-  const addMatch = query.match(/what is (-?\d+) plus (-?\d+)/i);
-  if (addMatch) {
-    return (parseInt(addMatch[1]) + parseInt(addMatch[2])).toString();
+  if (/what is -?\d+( plus -?\d+)+/i.test(query)) {
+    const numbers = (query.match(/-?\d+/g) || []).map(Number);
+    return numbers.reduce((sum, n) => sum + n, 0).toString();
   }
 
   if (query.toLowerCase().includes("largest")) {
